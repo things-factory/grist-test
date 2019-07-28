@@ -1,7 +1,6 @@
+// import { registerEditor } from '@things-factory/grist-ui'
+// import { ObjectEditor } from './editors/object-editor'
+
 export default function bootstrap() {
-  // import('@things-factory/grist-ui').then(grist => {
-  //   import('./editors/object-editor').then(editor => {
-  //     grist.registerEditor('object', editor.ObjectEditor)
-  //   })
-  // })
+  // registerEditor('object', ObjectEditor)
 }
