@@ -288,6 +288,9 @@ class GristTest extends localize(i18next)(PageView) {
         }
       ],
       rows: {
+        selectable: {
+          multiple: true
+        },
         handlers: {
           click: 'select-row-toggle'
         }
