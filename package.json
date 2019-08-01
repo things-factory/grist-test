@@ -1,6 +1,6 @@
 {
   "name": "@things-factory/grist-test",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "main": "dist-server/index.js",
   "browser": "client/index.js",
   "things-factory": true,
@@ -29,9 +29,10 @@
   },
   "dependencies": {
     "@things-factory/grist-ui": "*",
-    "@things-factory/shell": "*"
+    "@things-factory/shell": "*",
+    "bwip-js": "^1.7.3"
   },
   "devDependencies": {
-    "@things-factory/tester": "*"
+    "@things-factory/opa-test": "*"
   }
 }
