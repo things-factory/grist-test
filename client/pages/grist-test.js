@@ -40,36 +40,17 @@ class GristTest extends localize(i18next)(PageView) {
       <data-grist
         .mode=${isMobileDevice() ? 'LIST' : 'GRID'}
         .config=${this.config}
-        .data=${this.data}
-        @page-changed=${e => {
-          this.page = e.detail
-          this.buildData()
-        }}
-        @limit-changed=${e => {
-          this.limit = e.detail
-          this.buildData()
-        }}
-        @sorters-changed=${e => {
-          this.sorters = e.detail
-          this.buildData()
-        }}
+        .fetchHandler=${this.fetchHandler}
       ></data-grist>
     `
   }
 
-  async buildData() {
-    await sleep(1000)
-
-    var page = this.page
-    var limit = this.limit
-    var sorters = this.sorters
+  async fetchHandler({ page, limit, sorters = [] }) {
     var total = 120993
     var start = (page - 1) * limit
 
-    this.data = {
+    return {
       total,
-      page,
-      limit,
       records: Array(limit * page > total ? total % limit : limit)
         .fill()
         .map((item, idx) => {
@@ -79,6 +60,7 @@ class GristTest extends localize(i18next)(PageView) {
             description: idx % 2 ? 'hatiolab manager' : 'hatiosea manager',
             email: idx % 2 ? 'shnam@gmail.com' : 'heartyoh@gmail.com',
             active: idx % 2 ? true : false,
+            barcode: idx % 2 ? '1234567890' : '0987654321',
             company:
               idx % 2
                 ? {
@@ -102,7 +84,7 @@ class GristTest extends localize(i18next)(PageView) {
     }
   }
 
-  activated(active) {
+  async activated(active) {
     if (!active) {
       return
     }
@@ -173,31 +155,34 @@ class GristTest extends localize(i18next)(PageView) {
           name: 'email',
           header: i18next.t('field.email'),
           record: {
-            align: 'left',
+            align: 'center',
             editable: true
           },
           sortable: true,
           width: 130
         },
         {
-          type: 'object',
+          type: 'barcode',
+          name: 'barcode',
+          header: i18next.t('field.barcode'),
+          record: {
+            align: 'center',
+            editable: true,
+            options: {
+              type: 'qrcode'
+            }
+          },
+          sortable: false,
+          width: 140
+        },
+        {
+          type: 'id',
           name: 'company',
           header: i18next.t('field.company'),
           record: {
-            align: 'left',
+            align: 'center',
             editable: true,
-            options: {
-              queryName: 'companies',
-              basicArgs: {
-                filters: [
-                  {
-                    name: 'name',
-                    operator: 'like',
-                    value: 'alternative'
-                  }
-                ]
-              }
-            }
+            options: {}
           },
           sortable: true,
           width: 240
@@ -246,7 +231,7 @@ class GristTest extends localize(i18next)(PageView) {
           name: 'rate',
           header: i18next.t('field.rate'),
           record: {
-            align: 'center',
+            align: 'right',
             editable: true
           },
           sortable: true,
@@ -312,7 +297,9 @@ class GristTest extends localize(i18next)(PageView) {
     this.page = 1
     this.limit = 50
 
-    this.buildData(1)
+    await this.updateComplete
+
+    this.shadowRoot.querySelector('data-grist').fetch()
   }
 }
 
