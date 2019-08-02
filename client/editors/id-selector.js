@@ -160,6 +160,9 @@ export class IdSelector extends LitElement {
 
     await this.updateComplete
 
+    /* TODO config가 설정될 때, fetch() 가 동작하므로, fetch 완료 이벤트를 받아서, selected를 설정해주는 것이 좋겠다. 
+       현재는 fetch() 가 두번 일어난다.
+       */
     var grist = this.shadowRoot.querySelector('data-grist')
     await grist.fetch()
 
@@ -167,6 +170,7 @@ export class IdSelector extends LitElement {
     if (selected) {
       this.selectedRecords = [selected]
     }
+    /* TODO config가 설정될 때, fetch() 가 동작하므로, fetch 완료 이벤트를 받아서, selected를 설정해주는 것이 좋겠다. */
   }
 
   async fetchHandler({ page, limit, sorters = [] }) {
