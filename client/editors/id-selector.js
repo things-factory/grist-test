@@ -171,6 +171,9 @@ export class IdSelector extends LitElement {
       this.selectedRecords = [selected]
     }
     /* TODO config가 설정될 때, fetch() 가 동작하므로, fetch 완료 이벤트를 받아서, selected를 설정해주는 것이 좋겠다. */
+
+    await this.updateComplete
+    grist.focus()
   }
 
   async fetchHandler({ page, limit, sorters = [] }) {

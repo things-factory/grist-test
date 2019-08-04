@@ -75,6 +75,8 @@ export class IdEditor extends LitElement {
 
       this.openSelector()
     })
+
+    this.openSelector()
   }
 
   get icon() {
