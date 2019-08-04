@@ -57,26 +57,27 @@ class GristTest extends localize(i18next)(PageView) {
           return {
             id: idx,
             name: idx % 2 ? `shnam-${start + idx + 1}` : `heartyoh-${start + idx + 1}`,
-            description: idx % 2 ? 'hatiolab manager' : 'hatiosea manager',
-            email: idx % 2 ? 'shnam@gmail.com' : 'heartyoh@gmail.com',
-            active: idx % 2 ? true : false,
-            barcode: idx % 2 ? '1234567890' : '0987654321',
+            description: idx % 2 ? `hatiolab manager-${start + idx + 1}` : `hatiosea manager-${start + idx + 1}`,
+            email: idx % 2 ? `shnam-${start + idx + 1}@gmail.com` : `heartyoh-${start + idx + 1}@gmail.com`,
+            active: Math.round(Math.random() * 2) % 2 ? true : false,
+            barcode: idx % 2 ? `1234567890${start + idx + 1}` : `0987654321${start + idx + 1}`,
             company:
               idx % 2
                 ? {
                     id: '2',
                     name: 'HatioLAB',
-                    description: '경기도 성남시'
+                    description: `경기도 성남시-${start + idx + 1}`
                   }
                 : {
                     id: '3',
                     name: 'HatioSEA',
-                    description: '말레이시아 세티아알람'
+                    description: `말레이시아 세티아알람-${start + idx + 1}`
                   },
-            role: idx % 2 ? 'admin' : 'worker',
-            color: idx % 2 ? '#87f018' : '#180f87',
+            role: ['admin', 'worker', 'tester'][idx % 3],
+            color: idx % 2 ? `#87f018` : `#180f87`,
             rate: Math.round(Math.random() * 100),
-            homepage: idx % 2 ? 'http://hatiolab.com' : 'http://deadpool.hatiolab.com',
+            homepage:
+              idx % 2 ? `http://hatiolab.com/${start + idx + 1}` : `http://deadpool.hatiolab.com/${start + idx + 1}`,
             createdAt: Date.now(),
             updatedAt: Date.now()
           }

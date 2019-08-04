@@ -99,8 +99,9 @@ export class IdEditor extends LitElement {
           detail: {
             before: this.value,
             after: selected,
-            row: this.row,
-            column: this.column
+            record: this.record,
+            column: this.column,
+            row: this.row
           }
         })
       )

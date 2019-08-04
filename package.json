@@ -1,6 +1,6 @@
 {
   "name": "@things-factory/grist-test",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "main": "dist-server/index.js",
   "browser": "client/index.js",
   "things-factory": true,
@@ -30,8 +30,7 @@
   "dependencies": {
     "@things-factory/barcode-ui": "*",
     "@things-factory/grist-ui": "*",
-    "@things-factory/shell": "*",
-    "bwip-js": "^1.7.3"
+    "@things-factory/shell": "*"
   },
   "devDependencies": {
     "@things-factory/board-test": "*",
