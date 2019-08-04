@@ -79,16 +79,6 @@ export class IdEditor extends LitElement {
     this.openSelector()
   }
 
-  get icon() {
-    return this.shadowRoot.querySelector('mwc-icon')
-  }
-
-  select() {}
-
-  focus() {
-    this.icon.focus()
-  }
-
   openSelector() {
     if (this.popup) {
       delete this.popup
