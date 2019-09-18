@@ -214,7 +214,7 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'select',
           name: 'role',
-          header: 'field.active',
+          header: 'field.role',
           record: {
             align: 'center',
             options: ['admin', 'worker', 'tester'],

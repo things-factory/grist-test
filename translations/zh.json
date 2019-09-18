@@ -1,5 +1,6 @@
 {
   "field.barcode": "barcode",
   "field.active": "active",
-  "field.rate": "rate"
+  "field.rate": "rate",
+  "field.role": "role"
 }
