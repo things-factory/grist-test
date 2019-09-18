@@ -299,8 +299,7 @@ class GristTest extends localize(i18next)(PageView) {
       ],
       pagination: {
         pages: [20, 30, 50, 100, 200]
-      },
-      translator: x => i18next.t(x)
+      }
     }
 
     this.page = 1
