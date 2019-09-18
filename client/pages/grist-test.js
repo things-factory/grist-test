@@ -35,6 +35,10 @@ class GristTest extends localize(i18next)(PageView) {
     }
   }
 
+  get grist() {
+    return this.shadowRoot.querySelector('data-grist')
+  }
+
   render() {
     return html`
       <data-grist
@@ -43,6 +47,10 @@ class GristTest extends localize(i18next)(PageView) {
         .fetchHandler=${this.fetchHandler}
       ></data-grist>
     `
+  }
+
+  languageUpdated() {
+    this.grist.refresh()
   }
 
   async fetchHandler({ page, limit, sorters = [] }) {
@@ -121,7 +129,7 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'link',
           name: 'name',
-          header: i18next.t('field.name'),
+          header: 'field.name',
           record: {
             align: 'center',
             editable: true,
@@ -139,7 +147,7 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'string',
           name: 'description',
-          header: i18next.t('field.description'),
+          header: 'field.description',
           record: {
             align: 'left'
           },
@@ -153,7 +161,7 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'string',
           name: 'email',
-          header: i18next.t('field.email'),
+          header: 'field.email',
           record: {
             align: 'center',
             editable: true
@@ -164,7 +172,7 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'barcode',
           name: 'barcode',
-          header: i18next.t('field.barcode'),
+          header: 'field.barcode',
           record: {
             align: 'center',
             editable: true,
@@ -178,7 +186,7 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'id',
           name: 'company',
-          header: i18next.t('field.company'),
+          header: 'field.company',
           record: {
             align: 'center',
             editable: true,
@@ -190,14 +198,14 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'boolean',
           name: 'active',
-          header: i18next.t('field.active'),
+          header: 'field.active',
           record: {
             align: 'center',
             editable: true
           },
           handlers: {
             dblclick: () => {
-              console.log(this.shadowRoot.querySelector('data-grist').dirtyRecords)
+              console.log(this.grist.dirtyRecords)
             }
           },
           sortable: true,
@@ -206,7 +214,7 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'select',
           name: 'role',
-          header: i18next.t('field.active'),
+          header: 'field.active',
           record: {
             align: 'center',
             options: ['admin', 'worker', 'tester'],
@@ -218,7 +226,7 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'color',
           name: 'color',
-          header: i18next.t('field.color'),
+          header: 'field.color',
           record: {
             align: 'center',
             editable: true
@@ -229,7 +237,7 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'float',
           name: 'rate',
-          header: i18next.t('field.rate'),
+          header: 'field.rate',
           record: {
             align: 'right',
             editable: true
@@ -240,7 +248,7 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'progress',
           name: 'rate',
-          header: i18next.t('field.rate'),
+          header: 'field.rate',
           record: {
             align: 'center',
             editor: 'float',
@@ -252,7 +260,7 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'datetime',
           name: 'updatedAt',
-          header: i18next.t('field.updated_at'),
+          header: 'field.updated_at',
           record: {
             align: 'center',
             editable: true
@@ -263,7 +271,7 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'datetime',
           name: 'createdAt',
-          header: i18next.t('field.created_at'),
+          header: 'field.created_at',
           record: {
             align: 'center',
             editable: true
@@ -291,7 +299,8 @@ class GristTest extends localize(i18next)(PageView) {
       ],
       pagination: {
         pages: [20, 30, 50, 100, 200]
-      }
+      },
+      translator: x => i18next.t(x)
     }
 
     this.page = 1
@@ -299,7 +308,7 @@ class GristTest extends localize(i18next)(PageView) {
 
     await this.updateComplete
 
-    this.shadowRoot.querySelector('data-grist').fetch()
+    this.grist.fetch()
   }
 }
 
