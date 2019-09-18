@@ -1,5 +1,6 @@
 {
   "field.barcode": "바코드",
   "field.active": "활성화",
-  "field.rate": "비율"
+  "field.rate": "비율",
+  "field.role": "역할"
 }
