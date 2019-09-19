@@ -26,6 +26,9 @@ export class IdSelector extends LitElement {
           flex-direction: column;
 
           background-color: #fff;
+
+          width: var(--overlay-center-normal-width, 50%);
+          height: var(--overlay-center-normal-height, 50%);
         }
 
         data-grist {

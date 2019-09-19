@@ -50,7 +50,7 @@ class GristTest extends localize(i18next)(PageView) {
   }
 
   languageUpdated() {
-    this.grist.refresh()
+    this.config = this.gristConfig
   }
 
   async fetchHandler({ page, limit, sorters = [] }) {
@@ -93,12 +93,8 @@ class GristTest extends localize(i18next)(PageView) {
     }
   }
 
-  async activated(active) {
-    if (!active) {
-      return
-    }
-
-    this.config = {
+  get gristConfig() {
+    return {
       columns: [
         {
           type: 'gutter',
@@ -129,7 +125,7 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'link',
           name: 'name',
-          header: 'field.name',
+          header: i18next.t('field.name'),
           record: {
             align: 'center',
             editable: true,
@@ -147,7 +143,7 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'string',
           name: 'description',
-          header: 'field.description',
+          header: i18next.t('field.description'),
           record: {
             align: 'left'
           },
@@ -161,7 +157,7 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'string',
           name: 'email',
-          header: 'field.email',
+          header: i18next.t('field.email'),
           record: {
             align: 'center',
             editable: true
@@ -172,7 +168,7 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'barcode',
           name: 'barcode',
-          header: 'field.barcode',
+          header: i18next.t('field.barcode'),
           record: {
             align: 'center',
             editable: true,
@@ -186,7 +182,7 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'id',
           name: 'company',
-          header: 'field.company',
+          header: i18next.t('field.company'),
           record: {
             align: 'center',
             editable: true,
@@ -198,7 +194,7 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'boolean',
           name: 'active',
-          header: 'field.active',
+          header: i18next.t('field.active'),
           record: {
             align: 'center',
             editable: true
@@ -214,7 +210,7 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'select',
           name: 'role',
-          header: 'field.role',
+          header: i18next.t('field.role'),
           record: {
             align: 'center',
             options: ['admin', 'worker', 'tester'],
@@ -226,7 +222,7 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'color',
           name: 'color',
-          header: 'field.color',
+          header: i18next.t('field.color'),
           record: {
             align: 'center',
             editable: true
@@ -237,7 +233,7 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'float',
           name: 'rate',
-          header: 'field.rate',
+          header: i18next.t('field.rate'),
           record: {
             align: 'right',
             editable: true
@@ -248,7 +244,7 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'progress',
           name: 'rate',
-          header: 'field.rate',
+          header: i18next.t('field.rate'),
           record: {
             align: 'center',
             editor: 'float',
@@ -260,7 +256,7 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'datetime',
           name: 'updatedAt',
-          header: 'field.updated_at',
+          header: i18next.t('field.updated_at'),
           record: {
             align: 'center',
             editable: true
@@ -271,7 +267,7 @@ class GristTest extends localize(i18next)(PageView) {
         {
           type: 'datetime',
           name: 'createdAt',
-          header: 'field.created_at',
+          header: i18next.t('field.created_at'),
           record: {
             align: 'center',
             editable: true
@@ -301,6 +297,14 @@ class GristTest extends localize(i18next)(PageView) {
         pages: [20, 30, 50, 100, 200]
       }
     }
+  }
+
+  async activated(active) {
+    if (!active) {
+      return
+    }
+
+    this.config = this.gristConfig
 
     this.page = 1
     this.limit = 50
