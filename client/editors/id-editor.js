@@ -119,7 +119,8 @@ export class IdEditor extends LitElement {
       `
 
     this.popup = openPopup(template, {
-      backdrop: true
+      backdrop: true,
+      size: 'large'
     })
   }
 }

@@ -113,7 +113,6 @@ export class IdEditor extends LitElement {
       html`
         <id-selector
           .value=${value.id}
-          style="width: 550px;height: 400px;"
           .confirmCallback=${confirmCallback.bind(this)}
           .queryName=${this.column.record.options.queryName}
           .basicArgs=${this.column.record.options.basicArgs}
@@ -121,7 +120,8 @@ export class IdEditor extends LitElement {
       `
 
     this.popup = openPopup(template, {
-      backdrop: true
+      backdrop: true,
+      size: 'large'
     })
   }
 }
