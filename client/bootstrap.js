@@ -8,9 +8,6 @@ import { BarcodeRenderer } from './renderers/barcode-renderer'
 import { ADD_MORENDA } from '@things-factory/more-base'
 
 export default function bootstrap() {
-  /* global setting for DataGrist */
-  // DataGrist.translator = x => i18next.t(x)  // We don't use DataGrist.translator
-
   registerRenderer('id', IdRenderer)
   registerRenderer('barcode', BarcodeRenderer)
   registerEditor('id', IdEditor)
