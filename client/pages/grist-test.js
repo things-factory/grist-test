@@ -1,6 +1,6 @@
 import { html, css } from 'lit-element'
 
-import { PageView, isMobileDevice, sleep } from '@things-factory/shell'
+import { PageView, isMobileDevice } from '@things-factory/shell'
 import { localize, i18next } from '@things-factory/i18n-base'
 
 import '@things-factory/grist-ui'
