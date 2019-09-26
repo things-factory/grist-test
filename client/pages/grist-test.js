@@ -49,10 +49,6 @@ class GristTest extends localize(i18next)(PageView) {
     `
   }
 
-  languageUpdated() {
-    this.config = this.gristConfig
-  }
-
   async fetchHandler({ page, limit, sorters = [] }) {
     var total = 120993
     var start = (page - 1) * limit
@@ -299,19 +295,17 @@ class GristTest extends localize(i18next)(PageView) {
     }
   }
 
-  async activated(active) {
-    if (!active) {
-      return
+  pageUpdated(changes, lifecycle) {
+    if (this.active) {
+      this.grist.fetch()
     }
+  }
 
+  pageInitialized() {
     this.config = this.gristConfig
 
     this.page = 1
     this.limit = 50
-
-    await this.updateComplete
-
-    this.grist.fetch()
   }
 }
 

@@ -6,14 +6,6 @@ export default {
   route,
   routes: [
     {
-      tagname: 'grid-test',
-      page: 'grid-test'
-    },
-    {
-      tagname: 'list-test',
-      page: 'list-test'
-    },
-    {
       tagname: 'grist-test',
       page: 'grist-test'
     }
