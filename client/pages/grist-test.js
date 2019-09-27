@@ -159,7 +159,21 @@ class GristTest extends localize(i18next)(PageView) {
             editable: true
           },
           sortable: true,
-          width: 130
+          width: 130,
+          validation: function(after, before, record, column) {
+            if (after.indexOf('@') == -1) {
+              document.dispatchEvent(
+                new CustomEvent('notify', {
+                  detail: {
+                    type: 'error',
+                    message: `invalid value - ${after}`
+                  }
+                })
+              )
+              return false
+            }
+            return true
+          }
         },
         {
           type: 'barcode',
