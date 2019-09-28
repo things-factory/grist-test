@@ -2,5 +2,7 @@
   "field.barcode": "바코드",
   "field.active": "활성화",
   "field.rate": "비율",
-  "field.role": "역할"
+  "field.role": "역할",
+  "field.dynamic_type": "변화 타입",
+  "field.dynamic_value": "변화타입 값"
 }

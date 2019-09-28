@@ -2,5 +2,7 @@
   "field.barcode": "barcode",
   "field.active": "active",
   "field.rate": "rate",
-  "field.role": "role"
+  "field.role": "role",
+  "field.dynamic_type": "dynamic type",
+  "field.dynamic_value": "dynamic value"
 }

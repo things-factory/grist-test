@@ -3,7 +3,7 @@ import { html, css } from 'lit-element'
 import { PageView, isMobileDevice } from '@things-factory/shell'
 import { localize, i18next } from '@things-factory/i18n-base'
 
-import '@things-factory/grist-ui'
+import { getRenderer, getEditor } from '@things-factory/grist-ui'
 
 class GristTest extends localize(i18next)(PageView) {
   static get styles() {
@@ -80,6 +80,8 @@ class GristTest extends localize(i18next)(PageView) {
             role: ['admin', 'worker', 'tester'][idx % 3],
             color: idx % 2 ? `#87f018` : `#180f87`,
             rate: Math.round(Math.random() * 100),
+            dynamicType: ['text', 'email', 'checkbox', 'color', 'progress', 'barcode'][idx % 5],
+            dynamicValue: ['abcdefghijkl', 'heartyoh@hatiolab.com', 'true', 'orange', '50', '1234567890'][idx % 5],
             homepage:
               idx % 2 ? `http://hatiolab.com/${start + idx + 1}` : `http://deadpool.hatiolab.com/${start + idx + 1}`,
             createdAt: Date.now(),
@@ -151,7 +153,7 @@ class GristTest extends localize(i18next)(PageView) {
           }
         },
         {
-          type: 'string',
+          type: 'email',
           name: 'email',
           header: i18next.t('field.email'),
           record: {
@@ -257,11 +259,37 @@ class GristTest extends localize(i18next)(PageView) {
           header: i18next.t('field.rate'),
           record: {
             align: 'center',
-            editor: 'float',
             editable: true
           },
           sortable: true,
           width: 50
+        },
+        {
+          type: 'select',
+          name: 'dynamicType',
+          header: i18next.t('field.dynamic_type'),
+          record: {
+            align: 'center',
+            editable: true,
+            options: ['text', 'email', 'checkbox', 'color', 'progress', 'barcode']
+          },
+          width: 50
+        },
+        {
+          type: 'string',
+          name: 'dynamicValue',
+          header: i18next.t('field.dynamic_value'),
+          record: {
+            align: 'center',
+            editable: true,
+            editor: function(value, column, record, rowIndex, field) {
+              return getEditor(record.dynamicType)(value, column, record, rowIndex, field)
+            },
+            renderer: function(value, column, record, rowIndex, field) {
+              return getRenderer(record.dynamicType)(value, column, record, rowIndex, field)
+            }
+          },
+          width: 200
         },
         {
           type: 'datetime',
