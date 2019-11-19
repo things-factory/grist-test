@@ -8,6 +8,10 @@ export default {
     {
       tagname: 'grist-test',
       page: 'grist-test'
+    },
+    {
+      tagname: 'report-test',
+      page: 'report-test'
     }
   ]
 }

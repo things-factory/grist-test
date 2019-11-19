@@ -13,7 +13,7 @@ export default function bootstrap() {
   registerEditor('id', IdEditor)
   registerEditor('barcode', getEditor('string'))
 
-  /* add user profile morenda */
+  /* add data-grist test morenda */
   store.dispatch({
     type: ADD_MORENDA,
     morenda: {
@@ -23,6 +23,20 @@ export default function bootstrap() {
       name: 'grist test',
       action: () => {
         navigate('grist-test')
+      }
+    }
+  })
+
+  /* add data-report test morenda */
+  store.dispatch({
+    type: ADD_MORENDA,
+    morenda: {
+      icon: html`
+        <mwc-icon>list</mwc-icon>
+      `,
+      name: 'report test',
+      action: () => {
+        navigate('report-test')
       }
     }
   })
