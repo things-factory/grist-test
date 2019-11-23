@@ -1,9 +1,7 @@
 import { html, css } from 'lit-element'
 
-import { PageView, isMobileDevice } from '@things-factory/shell'
+import { PageView } from '@things-factory/shell'
 import { localize, i18next } from '@things-factory/i18n-base'
-
-import { getRenderer, getEditor } from '@things-factory/grist-ui'
 
 class ReportTest extends localize(i18next)(PageView) {
   static get styles() {
@@ -58,15 +56,13 @@ class ReportTest extends localize(i18next)(PageView) {
             id: idx,
             name: idx % 2 ? `shnam-${start + idx + 1}` : `heartyoh-${start + idx + 1}`,
             description: idx % 2 ? `hatiolab manager-${start + idx + 1}` : `hatiosea manager-${start + idx + 1}`,
-            email: idx % 2 ? `shnam-${start + idx + 1}@gmail.com` : `heartyoh-${start + idx + 1}@gmail.com`,
+            email: idx % 2 ? `shnam@gmail.com` : `heartyoh@gmail.com`,
             active: Math.round(Math.random() * 2) % 2 ? true : false,
-            barcode: idx % 2 ? `1234567890${start + idx + 1}` : `0987654321${start + idx + 1}`,
             company: idx % 5 ? 'HatioLAB' : 'HatioSEA',
             role: ['admin', 'worker', 'tester'][idx % 3],
             color: idx % 2 ? `#87f018` : `#180f87`,
-            rate: Math.round(Math.random() * 100),
-            dynamicType: ['text', 'email', 'checkbox', 'color', 'progress', 'barcode'][idx % 5],
-            dynamicValue: ['abcdefghijkl', 'heartyoh@hatiolab.com', 'true', 'orange', '50', '1234567890'][idx % 5],
+            height: Math.round(Math.random() * 100),
+            weight: Math.round(Math.random() * 100),
             homepage:
               idx % 2 ? `http://hatiolab.com/${start + idx + 1}` : `http://deadpool.hatiolab.com/${start + idx + 1}`,
             createdAt: Date.now(),
@@ -82,6 +78,27 @@ class ReportTest extends localize(i18next)(PageView) {
         {
           type: 'gutter',
           gutterName: 'sequence'
+        },
+        {
+          type: 'string',
+          name: 'company',
+          header: i18next.t('field.company'),
+          record: {
+            align: 'center',
+            options: {}
+          },
+          sortable: true,
+          width: 240
+        },
+        {
+          type: 'email',
+          name: 'email',
+          header: i18next.t('field.email'),
+          record: {
+            align: 'center'
+          },
+          sortable: true,
+          width: 130
         },
         {
           type: 'string',
@@ -121,40 +138,6 @@ class ReportTest extends localize(i18next)(PageView) {
           }
         },
         {
-          type: 'email',
-          name: 'email',
-          header: i18next.t('field.email'),
-          record: {
-            align: 'center'
-          },
-          sortable: true,
-          width: 130
-        },
-        {
-          type: 'barcode',
-          name: 'barcode',
-          header: i18next.t('field.barcode'),
-          record: {
-            align: 'center',
-            options: {
-              type: 'qrcode'
-            }
-          },
-          sortable: false,
-          width: 140
-        },
-        {
-          type: 'string',
-          name: 'company',
-          header: i18next.t('field.company'),
-          record: {
-            align: 'center',
-            options: {}
-          },
-          sortable: true,
-          width: 240
-        },
-        {
           type: 'boolean',
           name: 'active',
           header: i18next.t('field.active'),
@@ -180,41 +163,20 @@ class ReportTest extends localize(i18next)(PageView) {
           width: 120
         },
         {
-          type: 'color',
-          name: 'color',
-          header: i18next.t('field.color'),
-          record: {
-            align: 'center'
-          },
+          type: 'number',
+          name: 'weight',
+          header: i18next.t('field.weight'),
+          record: {},
           sortable: true,
           width: 50
         },
         {
-          type: 'progress',
-          name: 'rate',
-          header: i18next.t('field.rate'),
-          record: {
-            align: 'center'
-          },
+          type: 'number',
+          name: 'height',
+          header: i18next.t('field.height'),
+          record: {},
           sortable: true,
           width: 50
-        },
-        {
-          type: 'string',
-          name: 'dynamicType',
-          hidden: true
-        },
-        {
-          type: 'string',
-          name: 'dynamicValue',
-          header: i18next.t('field.dynamic_value'),
-          record: {
-            align: 'center',
-            renderer: function(value, column, record, rowIndex, field) {
-              return getRenderer(record.dynamicType)(value, column, record, rowIndex, field)
-            }
-          },
-          width: 200
         },
         {
           type: 'datetime',
@@ -238,7 +200,8 @@ class ReportTest extends localize(i18next)(PageView) {
         }
       ],
       rows: {
-        groups: ['company']
+        groups: ['company', 'email'],
+        totals: ['weight', 'height']
       },
       sorters: [
         {
