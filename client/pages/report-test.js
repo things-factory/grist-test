@@ -76,10 +76,6 @@ class ReportTest extends localize(i18next)(PageView) {
     return {
       columns: [
         {
-          type: 'gutter',
-          gutterName: 'sequence'
-        },
-        {
           type: 'string',
           name: 'company',
           header: i18next.t('field.company'),
