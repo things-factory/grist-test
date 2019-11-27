@@ -196,7 +196,7 @@ class ReportTest extends localize(i18next)(PageView) {
         }
       ],
       rows: {
-        groups: ['company', 'email'],
+        groups: [{column:'company',name:'company'}, {column:'email',name:'email'}],
         totals: ['weight', 'height']
       },
       sorters: [
