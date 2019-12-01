@@ -29,7 +29,10 @@ class ReportTest extends localize(i18next)(PageView) {
   get context() {
     return {
       title: 'Report Test',
-      printable: true
+      printable: {
+        accept: ['preview'],
+        content: this
+      }
     }
   }
 
@@ -63,6 +66,7 @@ class ReportTest extends localize(i18next)(PageView) {
             color: idx % 2 ? `#87f018` : `#180f87`,
             height: Math.round(Math.random() * 100),
             weight: Math.round(Math.random() * 100),
+            count: Math.round(Math.random() * 100),
             homepage:
               idx % 2 ? `http://hatiolab.com/${start + idx + 1}` : `http://deadpool.hatiolab.com/${start + idx + 1}`,
             createdAt: Date.now(),
@@ -161,7 +165,7 @@ class ReportTest extends localize(i18next)(PageView) {
         {
           type: 'number',
           name: 'weight',
-          header: i18next.t('field.weight'),
+          header: i18next.t('weight'),
           record: {},
           sortable: true,
           width: 50
@@ -169,7 +173,15 @@ class ReportTest extends localize(i18next)(PageView) {
         {
           type: 'number',
           name: 'height',
-          header: i18next.t('field.height'),
+          header: i18next.t('height'),
+          record: {},
+          sortable: true,
+          width: 50
+        },
+        {
+          type: 'number',
+          name: 'count',
+          header: i18next.t('count'),
           record: {},
           sortable: true,
           width: 50
@@ -196,8 +208,8 @@ class ReportTest extends localize(i18next)(PageView) {
         }
       ],
       rows: {
-        groups: [{column:'company',name:'company'}, {column:'email',name:'email'}],
-        totals: ['weight', 'height']
+        groups: [{ column: 'company', title: 'company total', align: 'right' }, { column: 'email' }],
+        totals: ['weight', 'height', 'count']
       },
       sorters: [
         {
