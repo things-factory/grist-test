@@ -46,7 +46,8 @@ class ReportTest extends localize(i18next)(PageView) {
     `
   }
 
-  async fetchHandler({ page, limit, sorters = [] }) {
+  async fetchHandler({ page, /*limit,*/ sorters = [] }) {
+    var limit = 50
     var total = 120993
     var start = (page - 1) * limit
 
@@ -87,7 +88,7 @@ class ReportTest extends localize(i18next)(PageView) {
             align: 'center',
             options: {}
           },
-          sortable: true,
+          sortable: false,
           width: 240
         },
         {
@@ -97,7 +98,7 @@ class ReportTest extends localize(i18next)(PageView) {
           record: {
             align: 'center'
           },
-          sortable: true,
+          sortable: false,
           width: 130
         },
         {
@@ -120,7 +121,7 @@ class ReportTest extends localize(i18next)(PageView) {
               // target: '_blank'
             }
           },
-          sortable: true,
+          sortable: false,
           width: 120
         },
         {
@@ -149,7 +150,7 @@ class ReportTest extends localize(i18next)(PageView) {
               console.log(this.report.dirtyRecords)
             }
           },
-          sortable: true,
+          sortable: false,
           width: 60
         },
         {
@@ -159,7 +160,7 @@ class ReportTest extends localize(i18next)(PageView) {
           record: {
             align: 'center'
           },
-          sortable: true,
+          sortable: false,
           width: 120
         },
         {
@@ -167,7 +168,7 @@ class ReportTest extends localize(i18next)(PageView) {
           name: 'weight',
           header: i18next.t('weight'),
           record: {},
-          sortable: true,
+          sortable: false,
           width: 50
         },
         {
@@ -175,7 +176,7 @@ class ReportTest extends localize(i18next)(PageView) {
           name: 'height',
           header: i18next.t('height'),
           record: {},
-          sortable: true,
+          sortable: false,
           width: 50
         },
         {
@@ -183,7 +184,7 @@ class ReportTest extends localize(i18next)(PageView) {
           name: 'count',
           header: i18next.t('count'),
           record: {},
-          sortable: true,
+          sortable: false,
           width: 50
         },
         {
@@ -193,7 +194,7 @@ class ReportTest extends localize(i18next)(PageView) {
           record: {
             align: 'center'
           },
-          sortable: true,
+          sortable: false,
           width: 180
         },
         {
@@ -203,7 +204,7 @@ class ReportTest extends localize(i18next)(PageView) {
           record: {
             align: 'center'
           },
-          sortable: true,
+          sortable: false,
           width: 180
         }
       ],
@@ -213,7 +214,7 @@ class ReportTest extends localize(i18next)(PageView) {
       },
       sorters: [
         {
-          name: 'name',
+          name: 'company',
           descending: true
         },
         {
@@ -225,7 +226,7 @@ class ReportTest extends localize(i18next)(PageView) {
 
   pageUpdated(changes, lifecycle) {
     if (this.active) {
-      this.report.fetch()
+      this.report.fetch({ limit: 50 })
     }
   }
 
