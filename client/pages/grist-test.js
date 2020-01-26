@@ -12,6 +12,9 @@ class GristTest extends localize(i18next)(PageView) {
         display: block;
 
         width: 100%;
+
+        --grid-record-emphasized-background-color: red;
+        --grid-record-emphasized-color: yellow;
       }
 
       data-grist {
@@ -320,6 +323,11 @@ class GristTest extends localize(i18next)(PageView) {
         },
         handlers: {
           click: 'select-row-toggle'
+        },
+        classifier: function(record, rowIndex) {
+          return {
+            emphasized: !!(record['rate'] > 80)
+          }
         }
       },
       sorters: [
