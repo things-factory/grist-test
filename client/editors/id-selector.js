@@ -1,5 +1,5 @@
 import { i18next } from '@things-factory/i18n-base'
-import { isMobileDevice } from '@things-factory/shell'
+import { isMobileDevice } from '@things-factory/utils'
 import { css, html, LitElement } from 'lit-element'
 import { MultiColumnFormStyles } from '@things-factory/form-ui'
 import '@things-factory/grist-ui'
